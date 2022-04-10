@@ -125,7 +125,7 @@ class ListParamType(CustomParamType):
         if self._convert_called:
             return value
 
-        if self._ignore_empty and value == "":
+        if self._ignore_empty and value == '':
             return []
         value = self._strip_separator(value)
         errors, converted_list = self._convert_expression_to_list(value)
