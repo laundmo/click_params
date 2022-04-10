@@ -13,13 +13,14 @@ Parameters:
 - `_type`: the class used to convert the string passed as option or argument.
 - `errors`: a single error class or a tuple of error classes that can be raised when trying to convert the string.
 - `name`: the name used in the error message to specify the type of the parameter, if it is not provided, the `name`
-class attribute will be used instead.
+  class attribute will be used instead.
 
 Below is an example to create a custom integer type. This is just for example because click already has a `click.INT`
 type.
 
 ````python
 from click_params import BaseParamType
+
 
 class IntType(BaseParamType):
     name = 'integer'
@@ -32,6 +33,7 @@ Here is another example where we have a tuple of errors. It is in fact the imple
 
 ````python
 from fractions import Fraction
+
 
 class FractionParamType(BaseParamType):
     name = 'fraction'
@@ -51,7 +53,7 @@ Parameters:
 
 - `callback`: validator function used to check the string passed as option or argument.
 - `name`: the name used in the error message to specify the type of the parameter, if it is not provided, the `name`
-class attribute will be used instead.
+  class attribute will be used instead.
 
 Below is an example to create a custom type that will check that the number passed as option or argument is even.
 
@@ -59,9 +61,11 @@ Below is an example to create a custom type that will check that the number pass
 from validators import validator
 from click_params import ValidatorParamType
 
+
 @validator
 def even(value):
     return not (int(value) % 2)
+
 
 class EvenType(ValidatorParamType):
     name = 'even'
@@ -71,14 +75,14 @@ class EvenType(ValidatorParamType):
 ````
 
 Some wise people will notice that the check is not complete in the `even` function because we don't check if the string
-is an integer and it could raise error. This is for the simplicity of the example but you are encouraged to make all
-the necessary tests in your code ;)
+is an integer and it could raise error. This is for the simplicity of the example but you are encouraged to make all the
+necessary tests in your code ;)
 
 ## RangeParamType
 
 Signature: `RangeParamType(param_type: click.ParamType, minimum: Min = None, maximum: Max = None, clamp: bool = False)`
 
-This class helps to create types where values needed to be bounded. The `minimum` and `maximum` parameters **must** have 
+This class helps to create types where values needed to be bounded. The `minimum` and `maximum` parameters **must** have
 the **same type** and the type **must** implement comparison operators (<, >, ..).
 
 Parameters:
@@ -87,8 +91,8 @@ Parameters:
 - `minimum`: the minimum value to allow. If not specified, it will be None, meaning that there is no lower limit.
 - `maximum`: the maximum value to allow. If not specified, it will be None, meaning that there is no upper limit.
 - `clamp`: if `True` the value falling outside the range will be clamped to the nearest limit (e.g: if you have a range
-of 0 to 3 and a user provides 4, the value saved will be 3), if `False` the value falling outside the range will raise
-an error.
+  of 0 to 3 and a user provides 4, the value saved will be 3), if `False` the value falling outside the range will raise
+  an error.
 
 Below is an example to create a custom IntRange. This is for example because click already provides a `click.IntRange`
 type.
@@ -96,6 +100,7 @@ type.
 ````python
 import click
 from click_params import RangeParamType
+
 
 class IntRange(RangeParamType):
     """This class will be used to test the correctness of RangeParamType"""
@@ -105,13 +110,12 @@ class IntRange(RangeParamType):
         super().__init__(click.INT, minimum, maximum, clamp)
 ````
 
-!!! note
-    If you look at the `__repr__` implementation of the `RangeParamType`, you will notice that it expects a `name` 
-    attribute with two words separated by a whitespace. If you don't want this behaviour you can override this method.
+!!! note If you look at the `__repr__` implementation of the `RangeParamType`, you will notice that it expects a `name`
+attribute with two words separated by a whitespace. If you don't want this behaviour you can override this method.
 
 ## ListParamType
 
-Signature: `ListParamType(param_type: click.ParamType, separator: str = ',', name: str = None)`
+Signature: `ListParamType(param_type: click.ParamType, separator: str = ',', name: str = None, ignore_empty: bool = False)`
 
 This class is used to implement custom list types.
 
@@ -120,15 +124,16 @@ Parameters:
 - `param_type`: the click type used to convert each item of the string passed as option or argument.
 - `separator`: the string used to delimit each item of the string.
 - `name`: the name used in the error message to specify the type of the parameter, if it is not provided, the `name`
-class attribute will be used instead.
-- `ignore_empty`: when this flag is True, will treat empty strings as empty lists. This is useful when we want empty
-list to be our default value.
+  class attribute will be used instead.
+- `ignore_empty`: a flag when set to True will tell a list param type to treat an empty string like an empty list. 
+  This is useful when we want an empty list to be our default value.
 
 Below is the implementation of the `IntListParamType`.
 
 ````python
 import click
 from click_params import ListParamType
+
 
 class IntListParamType(ListParamType):
     name = 'int list'
