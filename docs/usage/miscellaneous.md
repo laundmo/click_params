@@ -242,5 +242,5 @@ Error: third is not a valid cores number
 Two remarks compared to the last script.
 
 - The order of parameter types in the union is the order click will try to parse the value.
-- In the last two examples click was unable to parse because they were neither an integer nor a string from allowed 
+- In the last two examples click was unable to parse because they were neither an integer nor a string from allowed
 choices.

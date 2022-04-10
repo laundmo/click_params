@@ -125,7 +125,7 @@ Parameters:
 - `separator`: the string used to delimit each item of the string.
 - `name`: the name used in the error message to specify the type of the parameter, if it is not provided, the `name`
   class attribute will be used instead.
-- `ignore_empty`: a flag when set to True will tell a list param type to treat an empty string like an empty list. 
+- `ignore_empty`: a flag when set to True will tell a list param type to treat an empty string like an empty list.
   This is useful when we want an empty list to be our default value.
 
 Below is the implementation of the `IntListParamType`.
