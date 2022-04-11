@@ -51,18 +51,19 @@ Ready to contribute? Here is how to setup the project for local development.
     ```bash
     poetry install
     ```
+4. Install the git hooks with `pre-commit install`.
 
-4. Create a branch for local development
+5. Create a branch for local development
     ```bash
     git checkout -b name-of-bug-or-feature
     ```
 
-5. When you are done with your work, you need to pass all the tests using [nox](https://nox.thea.codes/en/stable/).
+6. When you are done with your work, you need to pass all the tests using [nox](https://nox.thea.codes/en/stable/).
     ```bash
     nox -s lint tests
     ```
 
-6. Commit your changes and push your branch to GitHub.
+7. Commit your changes and push your branch to GitHub.
     For the commit message, you should use the convention described [here](https://medium.com/@menuka/writing-meaningful-git-commit-messages-a62756b65c81).
     It is the convention developed by the angular project. There is  just one notable difference I'm adding.
     The verb must be conjugated **with the past tense** because I believe we are talking about a done action and not an
@@ -70,8 +71,8 @@ Ready to contribute? Here is how to setup the project for local development.
     Also for the scope, there is no particular set of scopes, so feel free to add what you thinks suits well your
     changes. If you don't have one in mind, don't put anything.
 
-7. Before submitting the pull request, you should verify that you include tests. There is also a code coverage
+8. Before submitting the pull request, you should verify that you include tests. There is also a code coverage
    configured with the project. You can check the pull request status to know if your tests cover all the code you wrote.
    If your pull request add functionality, please update the documentation.
 
-8. Submit your pull request through the GitHub website.
+9. Submit your pull request through the GitHub website.
