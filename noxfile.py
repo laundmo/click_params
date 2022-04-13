@@ -25,10 +25,6 @@ def tests(session):
     session.run('poetry', 'install')
     session.run('pytest')
 
-    # we notify codecov when the latest version of python is used
-    if session.python == PYTHON_VERSIONS[-1] and CI_ENVIRONMENT:
-        session.run('codecov', '-f', 'coverage.xml')
-
 
 @nox.session(python=PYTHON_VERSIONS[-1])
 def docs(session):
